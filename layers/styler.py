@@ -15,8 +15,8 @@ class StylerLayer:
             text = f"{random.choice(tags)} {text}"
         """
 
-        # 90% probabilidad de empezar en minúscula (muy humano en código)
-        if random.random() < 0.9:
+        # 70% probabilidad de empezar en minúscula (muy humano en código)
+        if random.random() < 0.7:
             text = text[0].lower() + text[1:]
         else:
             text = text[0].upper() + text[1:]

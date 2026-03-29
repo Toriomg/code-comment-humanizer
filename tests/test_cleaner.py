@@ -23,3 +23,16 @@ def test_emoticon_removal():
     assert ":D" not in output
     assert "xd" not in output
     assert output == "listo para deploy"
+
+def test_numbered_list_removal():
+    layer = CleanerLayer()
+    
+    # Caso simple
+    assert layer.apply("1. Configurar el servidor") == "configurar el servidor"
+    
+    # Caso con número de dos cifras
+    assert layer.apply("10. Retornar el resultado") == "retornar el resultado"
+    
+    # Caso donde el número está en medio (NO debe quitarlo)
+    # Solo queremos quitarlo si es un formato de lista al inicio
+    assert layer.apply("el puerto 80.80 es el default") == "el puerto 80.80 es el default"

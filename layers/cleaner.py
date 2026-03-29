@@ -18,6 +18,11 @@ class CleanerLayer:
         self.text_emoticons = [
             r":\)", r":D", r":\(", r";\)", r":-P", r":P", r"XD", r"xd", r"<3"
         ]
+        # 3. NUEVO: Regex para detectar listas numeradas (Ej: "1. ", "10. ")
+        # ^\d+ -> Empieza por uno o más dígitos
+        # \.   -> Seguido de un punto literal
+        # \s+  -> Seguido de uno o más espacios
+        self.list_pattern = re.compile(r"^\d+\.\s+")
 
     def apply(self, text):
         # Primero quitamos los emojis Unicode
@@ -32,7 +37,9 @@ class CleanerLayer:
         # Finalmente, eliminamos las frases redundantes de IA
         for pattern in self.ai_patterns:
             processed = re.sub(pattern, "", processed).strip()
-            
+        
+        processed = self.list_pattern.sub("", processed)
+
         # Limpiar espacios dobles que hayan podido quedar tras borrar palabras
         processed = re.sub(r'\s+', ' ', processed)
         
