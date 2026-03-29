@@ -16,3 +16,8 @@ def test_full_transformation():
     assert "🚀" not in output
     assert "db" in output or "config" in output
     print(f"\n[Test Integración] Entrada: {ai_comment} -> Salida: {output}")
+    ai_comment = "1. me gustan los macarrones."
+    output = humanizer.humanize_text(ai_comment)
+    print(f"\n[Test Integración] Entrada: {ai_comment} -> Salida: {output}")
+
+

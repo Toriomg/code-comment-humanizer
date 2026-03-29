@@ -98,20 +98,12 @@ class JargonLayer:
             "índice": "idx"
         }
 
+        self.sorted_keys = sorted(self.dictionary.keys(), key=len, reverse=True)
+
     def apply(self, text):
-        # Convertimos a minúsculas para comparar
-        words = text.lower().split()
-        new_words = []
-        
-        for w in words:
-            # Limpiamos puntuación pegada a la palabra para que el match sea exacto
-            clean_w = w.strip(".,:;()[]{}")
-            
-            if clean_w in self.dictionary:
-                # Reemplazamos manteniendo la puntuación si existía
-                replacement = self.dictionary[clean_w]
-                new_words.append(w.replace(clean_w, replacement))
-            else:
-                new_words.append(w)
-                
-        return " ".join(new_words)
+        processed = text.lower()
+        for key in self.sorted_keys:
+            # Reemplazo directo de la frase/palabra
+            if key in processed:
+                processed = processed.replace(key, self.dictionary[key])
+        return processed

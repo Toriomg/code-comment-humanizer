@@ -11,7 +11,7 @@ class CleanerLayer:
             r"a continuación,",
             r"es un ejemplo de"
         ]
-        self.emoji_regex = re.compile(r'[\U00010000-\U0010ffff]', flags=re.UNICODE)
+        self.emoji_regex = re.compile(r'[\u2000-\u3300\U00010000-\U0010ffff\uFE00-\uFE0F]')
 
         # 3. Lista de emoticonos de texto comunes
         # Se escapan los caracteres especiales para que Regex no falle
@@ -23,9 +23,8 @@ class CleanerLayer:
         # Primero quitamos los emojis Unicode
         processed = self.emoji_regex.sub(r'', text)
         
-        # Luego quitamos los emoticonos de texto
         for emoticon in self.text_emoticons:
-            processed = re.sub(emoticon, "", processed)
+            processed = re.sub(emoticon, "", processed, flags=re.IGNORECASE)
 
         # Convertimos a minúsculas y limpiamos espacios
         processed = processed.lower().strip()
