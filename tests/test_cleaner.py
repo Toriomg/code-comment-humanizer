@@ -36,3 +36,15 @@ def test_numbered_list_removal():
     # Caso donde el número está en medio (NO debe quitarlo)
     # Solo queremos quitarlo si es un formato de lista al inicio
     assert layer.apply("el puerto 80.80 es el default") == "el puerto 80.80 es el default"
+
+def test_camelcase_and_accents():
+    layer = CleanerLayer()
+    # Debería quitar acento de 'función' y 'autenticación'
+    # Debería mantener 'UserManager' y 'API'
+    input_txt = "Esta función llama al UserManager de la API para la autenticación."
+    output = layer.apply(input_txt)
+    
+    assert "funcion" in output # Sin acento
+    assert "UserManager" in output # CamelCase preservado
+    assert "API" in output # Acrónimo preservado
+    assert "autenticacion" in output # Sin acento

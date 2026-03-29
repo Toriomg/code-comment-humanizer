@@ -2,12 +2,12 @@ class JargonLayer:
     def __init__(self):
         self.dictionary = {
             # --- GENERAL / CORE ---
-            "función": "func",
+            "funcion": "func",
             "funciones": "funcs",
-            "parámetros": "params",
+            "parametros": "params",
             "argumentos": "args",
-            "configuración": "config",
-            "información": "info",
+            "configuracion": "config",
+            "informacion": "info",
             "identificador": "id",
             "variable": "var",
             "temporal": "tmp",
@@ -15,7 +15,7 @@ class JargonLayer:
             "anterior": "prev",
             "siguiente": "next",
             "error": "err",
-            "excepción": "exc",
+            "excepcion": "exc",
             "instancia": "inst",
             "objeto": "obj",
             "clase": "cls",
@@ -30,20 +30,21 @@ class JargonLayer:
             "archivo": "file",
             "directorio": "dir",
             "camino": "path",
+            "sistema operativo": "SSOO",
 
             # --- INFRA & DB ---
             "base de datos": "db",
-            "conexión": "conn",
+            "conexion": "conn",
             "consulta": "query",
             "registro": "log",
             "servidor": "srv",
             "cliente": "cli",
-            "producción": "prod",
+            "produccion": "prod",
             "desarrollo": "dev",
             "entorno": "env",
-            "autenticación": "auth",
-            "autorización": "authz",
-            "petición": "req",
+            "autenticacion": "auth",
+            "autorizacion": "authz",
+            "peticion": "req",
             "respuesta": "res",
             "cabecera": "hdr",
             "cuerpo": "body",
@@ -62,7 +63,7 @@ class JargonLayer:
             "ventana": "win",
             "documento": "doc",
             "estilo": "style",
-            "clase_css": "class",
+            "clase css": "class",
             "botón": "btn",
             "formulario": "form",
             "entrada": "input",
@@ -74,23 +75,23 @@ class JargonLayer:
             "serializador": "ser",
             "plantilla": "tpl",
             "decorador": "dec",
-            "conjunto_datos": "ds",
-            "entorno_virtual": "venv",
+            "conjunto datos": "ds",
+            "entorno virtual": "venv",
             "comando": "cmd",
             "tarea": "task",
             "cola": "queue",
 
             # --- LOW LEVEL & C ---
             "puntero": "ptr",
-            "dirección": "addr",
+            "direccion": "addr",
             "memoria": "mem",
-            "asignación": "alloc",
+            "asignacion": "alloc",
             "entero": "int",
             "cadena": "str",
-            "carácter": "char",
+            "caracter": "char",
             "arreglo": "arr",
             "matriz": "mtx",
-            "búfer": "buf",
+            "bufer": "buf",
             "estructura": "struct",
             "fuente": "src",
             "destino": "dst",
@@ -101,9 +102,8 @@ class JargonLayer:
         self.sorted_keys = sorted(self.dictionary.keys(), key=len, reverse=True)
 
     def apply(self, text):
-        processed = text.lower()
+        processed = text
         for key in self.sorted_keys:
-            # Reemplazo directo de la frase/palabra
             if key in processed:
                 processed = processed.replace(key, self.dictionary[key])
         return processed
